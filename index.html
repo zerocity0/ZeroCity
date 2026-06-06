@@ -1,10 +1,774 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-    <title>ZERO CITY</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ZERO CITY | まだ見ぬ世界を、キミの足で。</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+font-family:"Yu Gothic",sans-serif;
+background:#0b0f17;
+color:white;
+overflow-x:hidden;
+line-height:1.8;
+}
+
+/* ===== HEADER ===== */
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(10px);
+z-index:999;
+}
+
+nav{
+display:flex;
+justify-content:center;
+gap:40px;
+padding:18px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+nav a:hover{
+color:#00cfff;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+position:relative;
+min-height:100vh;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+padding:120px 20px 80px;
+
+background-image:
+linear-gradient(
+rgba(0,0,0,.45),
+rgba(0,0,0,.85)
+),
+url("background.jpg");
+
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+}
+
+.logo{
+width:min(850px,95%);
+filter:
+drop-shadow(0 0 20px rgba(255,215,0,.25));
+}
+
+/* ===== LOGO FLOAT ===== */
+
+.floating{
+animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-20px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+.hero h1{
+font-size:clamp(2rem,5vw,4rem);
+margin-top:20px;
+}
+
+.hero p{
+font-size:1.3rem;
+max-width:900px;
+margin-top:15px;
+}
+
+/* ===== COMPASS ===== */
+
+.compass{
+
+font-size:70px;
+
+margin-top:25px;
+
+animation:
+rotateCompass 12s linear infinite;
+
+filter:
+drop-shadow(0 0 10px #00cfff);
+
+}
+
+@keyframes rotateCompass{
+
+from{
+transform:rotate(0deg);
+}
+
+to{
+transform:rotate(360deg);
+}
+
+}
+
+/* ===== BUTTON ===== */
+
+.buttons{
+margin-top:35px;
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.btn{
+padding:15px 35px;
+text-decoration:none;
+border-radius:12px;
+font-weight:bold;
+transition:.3s;
+}
+
+/* Discord Glow */
+
+.discord{
+
+background:#5865F2;
+color:white;
+
+box-shadow:
+0 0 10px #5865F2,
+0 0 20px #5865F2,
+0 0 40px #5865F2;
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+box-shadow:
+0 0 10px #5865F2,
+0 0 20px #5865F2;
+
+}
+
+50%{
+
+box-shadow:
+0 0 20px #5865F2,
+0 0 40px #5865F2,
+0 0 80px #5865F2;
+
+}
+
+100%{
+
+box-shadow:
+0 0 10px #5865F2,
+0 0 20px #5865F2;
+
+}
+
+}
+
+.info{
+
+border:2px solid #d9a441;
+color:#d9a441;
+
+}
+
+.info:hover{
+
+background:#d9a441;
+color:black;
+
+}
+
+/* ===== SECTION ===== */
+
+section{
+padding:100px 10%;
+}
+
+.section-title{
+
+text-align:center;
+font-size:3rem;
+margin-bottom:60px;
+color:#d9a441;
+
+}
+
+/* ===== REVEAL ===== */
+
+.reveal{
+
+opacity:0;
+transform:translateY(60px);
+
+transition:
+opacity 1s ease,
+transform 1s ease;
+
+}
+
+.reveal.active{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+/* ===== FEATURES ===== */
+
+.features{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+}
+
+.card{
+
+background:#111827;
+
+padding:30px;
+
+border-radius:20px;
+
+border:1px solid #222;
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+border-color:#00cfff;
+
+}
+
+.card h3{
+
+color:#00cfff;
+margin-bottom:15px;
+
+}
+
+/* ←ここから Part2 を貼る */  
+
+.card p{
+color:#d1d5db;
+}
+
+/* ===== WORLD ===== */
+
+.world-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(300px,1fr));
+
+gap:25px;
+
+}
+
+.world{
+
+background:#111827;
+
+border-radius:20px;
+
+overflow:hidden;
+
+border:1px solid #222;
+
+}
+
+.world img{
+
+width:100%;
+height:220px;
+object-fit:cover;
+
+}
+
+.world-text{
+
+padding:20px;
+
+}
+
+.world-text h3{
+
+color:#00cfff;
+margin-bottom:10px;
+
+}
+
+/* ===== GALLERY ===== */
+
+.gallery{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+}
+
+.gallery img{
+
+width:100%;
+height:250px;
+object-fit:cover;
+
+border-radius:15px;
+
+transition:.3s;
+
+}
+
+.gallery img:hover{
+
+transform:scale(1.03);
+
+}
+
+/* ===== NEWS ===== */
+
+.news{
+
+max-width:900px;
+margin:auto;
+
+}
+
+.news-item{
+
+background:#111827;
+
+padding:20px;
+
+margin-bottom:15px;
+
+border-left:
+4px solid #00cfff;
+
+border-radius:10px;
+
+}
+
+/* ===== DISCORD ===== */
+
+.discord-section{
+
+text-align:center;
+
+background:
+linear-gradient(
+180deg,
+#090d14,
+#06080d
+);
+
+}
+
+.discord-section h2{
+
+font-size:3rem;
+
+margin-bottom:20px;
+
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+
+background:black;
+
+padding:40px;
+
+text-align:center;
+
+color:#888;
+
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+
+nav{
+
+gap:15px;
+font-size:.9rem;
+flex-wrap:wrap;
+
+}
+
+.hero p{
+
+font-size:1rem;
+
+}
+
+.section-title{
+
+font-size:2rem;
+
+}
+
+.discord-section h2{
+
+font-size:2rem;
+
+}
+
+}
+
+</style>
 </head>
+
 <body>
-    <h1>ようこそ ZERO CITYへ！</h1>
-    <p>これはGitHub Pagesで作ったホームページです。</p>
+
+<header>
+
+<nav>
+
+<a href="#about">ZERO CITYとは</a>
+
+<a href="#world">ワールド</a>
+
+<a href="#gallery">ギャラリー</a>
+
+<a href="#news">お知らせ</a>
+
+<a href="#join">参加方法</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<img src="logo.png"
+class="logo floating"
+alt="ZERO CITY">
+
+<h1>
+まだ見ぬ世界を、キミの足で。
+</h1>
+
+<p>
+
+Explore. Survive. Discover.<br>
+
+広大な世界を探索し、
+仲間と共に開拓する
+サバイバルサーバー。
+
+</p>
+
+<div class="compass">
+🧭
+</div>
+
+<div class="buttons">
+
+<a href="#"
+class="btn discord">
+
+Discordに参加
+
+</a>
+
+<a href="#about"
+class="btn info">
+
+サーバー紹介
+
+</a>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h2 class="section-title reveal">
+
+ZERO CITYとは
+
+</h2>
+
+<div class="features">
+
+<div class="card reveal">
+
+<h3>🗺️ 探索</h3>
+
+<p>
+
+広大な世界を自由に歩き、
+未知の景色を発見しよう。
+
+</p>
+
+</div>
+
+<div class="card reveal">
+
+<h3>🏕️ 開拓</h3>
+
+<p>
+
+資源を集め、
+自分だけの拠点を築こう。
+
+</p>
+
+</div>
+
+<div class="card reveal">
+
+<h3>🏛️ 遺跡</h3>
+
+<p>
+
+世界のどこかに眠る
+忘れられた秘密を探そう。
+
+</p>
+
+</div>
+
+<div class="card reveal">
+
+<h3>🤝 協力</h3>
+
+<p>
+
+仲間と共に冒険し、
+大きなプロジェクトに挑戦。
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+<section id="world">
+
+<h2 class="section-title reveal">
+ワールド紹介
+</h2>
+
+<div class="world-grid">
+
+<div class="world reveal">
+
+<img src="background.jpg">
+
+<div class="world-text">
+
+<h3>ZERO CITY</h3>
+
+<p>
+冒険者たちが集う開拓の拠点。
+</p>
+
+</div>
+
+</div>
+
+<div class="world reveal">
+
+<img src="background.jpg">
+
+<div class="world-text">
+
+<h3>広大な自然</h3>
+
+<p>
+森・山岳・洞窟が広がる未知の世界。
+</p>
+
+</div>
+
+</div>
+
+<div class="world reveal">
+
+<img src="background.jpg">
+
+<div class="world-text">
+
+<h3>遺跡探索</h3>
+
+<p>
+忘れられた文明の痕跡を発見しよう。
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="gallery">
+
+<h2 class="section-title reveal">
+冒険の記録
+</h2>
+
+<div class="gallery">
+
+<img class="reveal" src="background.jpg">
+<img class="reveal" src="background.jpg">
+<img class="reveal" src="background.jpg">
+
+</div>
+
+</section>
+
+<section id="news">
+
+<h2 class="section-title reveal">
+お知らせ
+</h2>
+
+<div class="news">
+
+<div class="news-item reveal">
+2026.06.06　ZERO CITY公式サイト公開
+</div>
+
+<div class="news-item reveal">
+現在サーバー制作中
+</div>
+
+<div class="news-item reveal">
+参加者募集中
+</div>
+
+</div>
+
+</section>
+
+<section id="join" class="discord-section">
+
+<h2 class="reveal">
+冒険はここから始まる。
+</h2>
+
+<p class="reveal" style="margin-bottom:30px;">
+
+Discordに参加して
+最新情報を受け取ろう！
+
+</p>
+
+<a href="#"
+class="btn discord reveal">
+
+Discordに参加
+
+</a>
+
+</section>
+
+<footer>
+
+© 2026 ZERO CITY
+
+</footer>
+
+<script>
+
+const reveals =
+document.querySelectorAll('.reveal');
+
+function revealOnScroll(){
+
+reveals.forEach(item=>{
+
+const windowHeight =
+window.innerHeight;
+
+const elementTop =
+item.getBoundingClientRect().top;
+
+if(elementTop < windowHeight - 100){
+
+item.classList.add('active');
+
+}
+
+});
+
+}
+
+window.addEventListener(
+'scroll',
+revealOnScroll
+);
+
+revealOnScroll();
+
+</script>
+
 </body>
 </html>
