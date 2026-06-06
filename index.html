@@ -663,6 +663,10 @@ Explore. Survive. Discover.<br>
 
 </div>
 
+<div id="server-status">
+  サーバー状態：<span id="status">読み込み中...</span>
+</div>
+
 <div class="compass">
 🧭
 </div>
@@ -905,14 +909,33 @@ revealOnScroll
 
 revealOnScroll();
 
-const players =
-Math.floor(Math.random()*40)+10;
+<script>
+const serverIP = "118.27.226.126";
 
-document.getElementById(
-"onlinePlayers"
-).innerText =
-`現在 ${players}人が冒険中`;
+async function checkServer() {
+  try {
+    const res = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
+    const data = await res.json();
+
+    const statusEl = document.getElementById("status");
+
+    if (data.online) {
+      statusEl.textContent = "🟢 ONLINE";
+      statusEl.style.color = "#00ff88";
+    } else {
+      statusEl.textContent = "🔴 OFFLINE";
+      statusEl.style.color = "#ff3b3b";
+    }
+  } catch (e) {
+    document.getElementById("status").textContent = "⚠️ エラー";
+  }
+}
+
+// 初回チェック
+checkServer();
+
+// 30秒ごとに自動更新
+setInterval(checkServer, 30000);
 </script>
-
 </body>
 </html>
