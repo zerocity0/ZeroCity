@@ -901,14 +901,24 @@ revealOnScroll
 revealOnScroll();
 
 <script>
+<script>
 const serverIP = "118.27.226.126";
 
 async function checkServer() {
+  const statusEl = document.getElementById("status");
+
   try {
     const res = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
-    const data = await res.json();
 
-    const statusEl = document.getElementById("status");
+    // ここ超重要：HTML返ってきても止める
+    const text = await res.text();
+    
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      throw new Error("JSONじゃないデータが返された");
+    }
 
     if (data.online) {
       statusEl.textContent = "🟢 ONLINE";
@@ -917,15 +927,15 @@ async function checkServer() {
       statusEl.textContent = "🔴 OFFLINE";
       statusEl.style.color = "#ff3b3b";
     }
+
   } catch (e) {
-    document.getElementById("status").textContent = "⚠️ エラー";
+    console.error(e);
+    statusEl.textContent = "⚠️ 取得失敗";
+    statusEl.style.color = "#ffaa00";
   }
 }
 
-// 初回チェック
 checkServer();
-
-// 30秒ごとに自動更新
 setInterval(checkServer, 30000);
 </script>
 </body>
