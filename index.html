@@ -445,10 +445,170 @@ font-size:2rem;
 
 }
 
+/* ===== NEWS ===== */
+
+.news-banner{
+
+background:
+rgba(0,207,255,.15);
+
+border:
+1px solid rgba(0,207,255,.4);
+
+padding:12px 20px;
+
+border-radius:15px;
+
+margin-bottom:30px;
+
+backdrop-filter:blur(10px);
+
+font-weight:bold;
+
+}
+
+/* ===== SERVER ===== */
+
+.server-status{
+
+margin-top:20px;
+
+font-size:1.2rem;
+
+font-weight:bold;
+
+color:#00ff88;
+
+}
+
+/* ===== DISCORD COUNT ===== */
+
+.discord-count{
+
+margin-top:25px;
+
+margin-bottom:20px;
+
+font-size:1.2rem;
+
+color:#7289da;
+
+font-weight:bold;
+
+}
+
+/* ===== PARTICLES ===== */
+
+.particles{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+pointer-events:none;
+
+z-index:1;
+
+overflow:hidden;
+
+}
+
+.particles span{
+
+position:absolute;
+
+bottom:-100px;
+
+width:8px;
+height:8px;
+
+background:white;
+
+border-radius:50%;
+
+box-shadow:
+0 0 10px white,
+0 0 20px white;
+
+animation:particle 12s linear infinite;
+
+}
+
+.particles span:nth-child(1){
+left:10%;
+animation-duration:10s;
+}
+
+.particles span:nth-child(2){
+left:20%;
+animation-duration:15s;
+}
+
+.particles span:nth-child(3){
+left:35%;
+animation-duration:12s;
+}
+
+.particles span:nth-child(4){
+left:50%;
+animation-duration:18s;
+}
+
+.particles span:nth-child(5){
+left:65%;
+animation-duration:14s;
+}
+
+.particles span:nth-child(6){
+left:80%;
+animation-duration:11s;
+}
+
+.particles span:nth-child(7){
+left:95%;
+animation-duration:16s;
+}
+
+@keyframes particle{
+
+0%{
+transform:translateY(0);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+90%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-110vh);
+opacity:0;
+}
+
+}
 </style>
 </head>
 
 <body>
+<div class="particles">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
 
 <header>
 
@@ -467,6 +627,13 @@ font-size:2rem;
 </header>
 
 <section class="hero">
+<div class="news-banner">
+
+📢 ZERO CITY開発進行中！
+参加者募集中！
+
+</div>
+
 
 <img src="logo.png"
 class="logo floating"
@@ -486,10 +653,29 @@ Explore. Survive. Discover.<br>
 
 </p>
 
+<div class="server-status">
+
+🟢 ONLINE
+
+<span id="onlinePlayers">
+現在 0人が冒険中
+</span>
+
+</div>
+
 <div class="compass">
 🧭
 </div>
 
+<div class="discord-count">
+
+👥 Discord参加者
+
+<span id="discordMembers">
+14人
+</span>
+
+</div>
 <div class="buttons">
 
 <a href="https://discord.gg/PVQuWPBfvr"
@@ -719,6 +905,13 @@ revealOnScroll
 
 revealOnScroll();
 
+const players =
+Math.floor(Math.random()*40)+10;
+
+document.getElementById(
+"onlinePlayers"
+).innerText =
+`現在 ${players}人が冒険中`;
 </script>
 
 </body>
