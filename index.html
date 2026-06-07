@@ -600,6 +600,170 @@ opacity:0;
 </head>
 
 <body>
+<div id="boot">
+
+  <div class="logo">ZERO CITY</div>
+
+  <div class="status">Connecting to ZERO CITY...</div>
+
+  <div class="progress-box">
+    <div class="progress-bar" id="bar"></div>
+  </div>
+
+  <div class="percent" id="percent">0%</div>
+
+</div>
+
+<canvas id="particles"></canvas>
+
+<style>
+body {
+  margin: 0;
+  background: black;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+/* 起動画面 */
+#boot {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: #00ff88;
+}
+
+/* ロゴズームイン */
+.logo {
+  font-size: 60px;
+  font-weight: bold;
+  text-shadow: 0 0 20px #00ff88;
+  animation: zoomIn 1.2s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(2);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 接続テキスト */
+.status {
+  margin-top: 20px;
+  color: #aaa;
+}
+
+/* プログレスバー */
+.progress-box {
+  width: 300px;
+  height: 6px;
+  background: #222;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #00ff88;
+  transition: width 0.1s linear;
+}
+
+/* パーセント */
+.percent {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* パーティクル背景 */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+</style>
+
+<script>
+// ===== プログレス処理 =====
+let progress = 0;
+const bar = document.getElementById("bar");
+const percent = document.getElementById("percent");
+
+const interval = setInterval(() => {
+  progress += Math.random() * 8;
+
+  if (progress >= 100) progress = 100;
+
+  bar.style.width = progress + "%";
+  percent.textContent = Math.floor(progress) + "%";
+
+  if (progress === 100) {
+    clearInterval(interval);
+
+    setTimeout(() => {
+      document.getElementById("boot").style.opacity = "0";
+      document.getElementById("boot").style.transition = "0.8s";
+
+      setTimeout(() => {
+        document.getElementById("boot").style.display = "none";
+      }, 800);
+    }, 500);
+  }
+}, 150);
+
+
+// ===== パーティクル =====
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2,
+    dx: (Math.random() - 0.5),
+    dy: (Math.random() - 0.5)
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#00ff88";
+
+  particles.forEach(p => {
+    p.x += p.dx;
+    p.y += p.dy;
+
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+  
 <div class="particles">
 
 <span></span>
