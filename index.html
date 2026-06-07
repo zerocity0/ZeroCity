@@ -617,11 +617,9 @@ opacity:0;
 <canvas id="particles"></canvas>
 
 <style>
-body {
-  margin: 0;
-  background: black;
-  font-family: sans-serif;
+body.booting {
   overflow: hidden;
+}
 }
 
 /* 起動画面 */
@@ -716,6 +714,9 @@ const interval = setInterval(() => {
 
       setTimeout(() => {
         document.getElementById("boot").style.display = "none";
+
+        document.body.classList.remove("booting");
+        
       }, 800);
     }, 500);
   }
